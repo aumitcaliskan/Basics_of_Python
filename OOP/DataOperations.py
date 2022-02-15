@@ -12,6 +12,12 @@ class DataOperations():
     """
 
     def __init__(self,data=np.random.rand(100,2),dataframe=pd.DataFrame()):
+
+        """
+        data: should be ndarray, dataframe, csv or json file.
+        default data: np.random.rand(100,2).
+        """
+
         self.data = data
         self.dataframe = dataframe
 
@@ -19,7 +25,6 @@ class DataOperations():
 
         """
         Read numpy array, json string and csv file; convert to a dataframe.
-        Default data: np.random.rand(100,2).
         """
 
         if isinstance(self.data,np.ndarray):
@@ -29,10 +34,10 @@ class DataOperations():
             self.dataframe = self.data
 
         else:
-            if '.csv' in self.data:
+            if self.data.endswith('.csv'):
                 self.dataframe = pd.read_csv(self.data)
 
-            elif '.json'in self.data:
+            elif self.data.endswith('.json'):
                 self.dataframe = pd.read_json(self.data)
 
             else:
